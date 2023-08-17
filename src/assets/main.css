@@ -1,0 +1,11 @@
+@import './base.css';
+
+@font-face {
+  font-family: 'font-padrao-bold-italic';
+  src: ("../assets/fonts/humnst777 bt/Hum");
+}
+
+#font-padrao-bold-italic{
+  font-family: 'font-padrao';
+}
+
