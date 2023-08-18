@@ -2,10 +2,10 @@
 
 @font-face {
   font-family: 'font-padrao-bold-italic';
-  src: ("../assets/fonts/humnst777 bt/Hum");
+  src: ('../fonts/humnst777_bt/Humnst777BTBoldItalic.ttf');
 }
 
 #font-padrao-bold-italic{
-  font-family: 'font-padrao';
+  font-family: 'font-padrao-bold-italic';
 }
 
