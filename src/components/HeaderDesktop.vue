@@ -1,4 +1,4 @@
-<template>
+<template v-if="TamanhoDaTela == 'Desktop'">
     <div class="w-full  bg-[#D9D9D9] flex border-b-4 border-[#BBBBBB]"
         style="height: auto; min-height: 10vh; max-height: fit-content;">
         
@@ -66,4 +66,9 @@
 </div></template>
 <script setup>
 import { RouterLink } from 'vue-router'
+
+const props = defineProps({
+    TamanhoDaTela: String
+})
+
 </script>
