@@ -8,7 +8,7 @@
         <HeaderDesktop/>
       </div>
     </header>
-    <body style="height: auto; min-height: 90vh; max-height: fit-content;">
+    <body style="height: auto; min-height: 89vh; max-height: fit-content;">
       <BannerHome/>
     </body>
   </main>

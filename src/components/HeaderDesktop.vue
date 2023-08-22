@@ -1,5 +1,5 @@
 <template v-if="TamanhoDaTela == 'Desktop'">
-    <div class="w-full  bg-[#D9D9D9] flex border-b-4 border-[#BBBBBB]"
+    <div class="w-full bg-[#D9D9D9] flex border-b-4 border-[#BBBBBB]"
         style="height: auto; min-height: 10vh; max-height: fit-content;">
         
         <RouterLink class="w-1/6" to="/">

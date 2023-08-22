@@ -9,16 +9,19 @@
       </div>
     </header>
 
-    <body style="height: auto; min-height: 89vh; max-height: fit-content;" class="flex flex-row">
-      <div v-if="filtroNaTela">
-        <div v-if="tamanhoDaTela == 'Mobile'">
-          <FiltroMobile/>
-        </div>
-        <div v-if="tamanhoDaTela == 'Desktop'">
-          <FiltroDesktop class="mt-[5vh]"/>
+    <body style="height: auto; min-height: 89vh; max-height: fit-content;" class="flex flex-row justify-center">
+      <div>
+        <div v-if="filtroNaTela">
+          <div v-if="tamanhoDaTela == 'Mobile'">
+            <FiltroMobile @click="mudarFiltroNaTela()" />
+          </div>
+          <div v-if="tamanhoDaTela == 'Desktop'">
+            <FiltroDesktop class="mt-[5vh] w-[20vw]" />
+          </div>
         </div>
       </div>
-      <div class="flex justify-center items-center flex-col">
+
+      <div v-if="tamanhoDaTela == 'Mobile'" class="flex flex-wrap justify-center">
         <div class="mt-[4vh] w-3/4 flex justify-end mr-[4vw]"
           style="height: auto; min-height: 5vh; max-height: fit-content; ">
           <div class="h-[6vh] w-[6vh] flex items-center justify-center bg-[#D9D9D9] cursor-pointer hover:bg-[#ebebeb]"
@@ -26,13 +29,38 @@
             <img class="h-[4vh] w-[4vw]" src="../assets/filtroIcon.svg">
           </div>
         </div>
-        <div class="w-3/4 flex flex-wrap content-start" style="height: auto; min-height: 90vh; max-height: fit-content; ">
+        <div class="w-3/4 flex flex-wrap content-start justify-center"
+          style="height: auto; min-height: 90vh; max-height: fit-content; ">
           <div v-for="produto in produtos" :key="produto">
-            <ProdutoDisplay class="hover:contrast-[1.15] drop-shadow-2xl" :nome="produto.nome" :preco="produto.preco"
-              :img="produto.img"></ProdutoDisplay>
+            <ProdutoDisplayMobile class="hover:contrast-[1.20] drop-shadow-2xl mt-[4vh] mb-[4vh] cursor-pointer"
+              :nome="produto.nome" :preco="produto.preco" :img="produto.img" :tamanhoDaTela="tamanhoDaTela">
+            </ProdutoDisplayMobile>
           </div>
         </div>
       </div>
+
+
+      <div v-if="tamanhoDaTela == 'Desktop'" class="flex flex-wrap justify-center">
+        <div class="mt-[4vh] w-3/4 flex justify-end mr-[4vw]"
+          style="height: auto; min-height: 5vh; max-height: fit-content; ">
+          <div class="h-[6vh] w-[6vh] flex items-center justify-center bg-[#D9D9D9] cursor-pointer hover:bg-[#ebebeb]"
+            @click="mudarFiltroNaTela()">
+            <img class="h-[4vh] w-[4vw]" src="../assets/filtroIcon.svg">
+          </div>
+        </div>
+        <div class="w-3/4 flex flex-wrap content-center justify-center" style="height: auto; min-height: 90vh; max-height: fit-content; ">
+          <div v-for="produto in produtos" :key="produto">
+            <ProdutoDisplay class="hover:contrast-[1.20] drop-shadow-2xl cursor-pointer" :nome="produto.nome"
+              :preco="produto.preco" :img="produto.img"></ProdutoDisplay>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
 
     </body>
   </main>
@@ -44,7 +72,8 @@ import HeaderMobile from '../components/HeaderMobile.vue';
 import ProdutoDisplay from '../components/ProdutoDisplay.vue';
 import TheRat from '../assets/TheRat.png';
 import FiltroMobile from '../components/FiltroMobile.vue';
-import FiltroDesktop from '../components/filtroDesktop.vue';
+import FiltroDesktop from '../components/FiltroDesktop.vue';
+import ProdutoDisplayMobile from '../components/ProdutoDisplayMobile.vue';
 
 
 export default {
@@ -53,8 +82,9 @@ export default {
     HeaderMobile,
     ProdutoDisplay,
     FiltroMobile,
-    FiltroDesktop
-},
+    FiltroDesktop,
+    ProdutoDisplayMobile
+  },
   methods: {
     mudarFiltroNaTela() {
       this.filtroNaTela = !this.filtroNaTela;
@@ -89,6 +119,62 @@ export default {
       filtroNaTela: false,
 
       produtos: [
+        {
+          nome: "The Rat",
+          preco: "R$ 90,00",
+          img: [
+            TheRat,
+          ],
+          descricao: "",
+          tamanhos: [
+            "P",
+            "M",
+            "G",
+            "GG"
+          ],
+          cores: [
+            "Preto",
+            "Branco",
+            "Cinza",
+            "Vermelho",
+            "Azul",
+            "Verde",
+            "Amarelo",
+            "Rosa",
+            "Roxo",
+            "Laranja",
+            "Marrom"
+          ],
+          quantidade: 50
+        },
+        {
+          nome: "The Rat",
+          preco: "R$ 90,00",
+          img: [
+            TheRat,
+          ],
+          descricao: "",
+          tamanhos: [
+            "P",
+            "M",
+            "G",
+            "GG"
+          ],
+          cores: [
+            "Preto",
+            "Branco",
+            "Cinza",
+            "Vermelho",
+            "Azul",
+            "Verde",
+            "Amarelo",
+            "Rosa",
+            "Roxo",
+            "Laranja",
+            "Marrom"
+          ],
+          quantidade: 50
+        },
         {
           nome: "The Rat",
           preco: "R$ 90,00",
