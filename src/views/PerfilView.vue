@@ -62,10 +62,10 @@
                             <div>
                                 <h1 class="text-4xl font-bold italic font-sans">Histórico de pedidos</h1>
                                 <div class="h-[59.5vh] w-[100%] overflow-auto border-b-4 border-black">
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
+                                    <div v-for="produtoDoHistorico in userLogado.historicoDeCompras"
+                                        :key="produtoDoHistorico">
+                                        <ProdutoNoHistorico class="w-[100%] h-[15vh]" :nome="produtoDoHistorico.nome" :preco="produtoDoHistorico.preco" :tamanho="produtoDoHistorico.tamanho" :img="produtoDoHistorico.img"></ProdutoNoHistorico>
+                                    </div>
                                 </div>
                                 <button
                                     class="border-2 border-black rounded-md mt-4 bg-[#D9D9D9] w-[60vw] h-14 text-center flex justify-center items-center">
@@ -131,13 +131,14 @@
                             <div>
                                 <h1 class="text-4xl font-bold italic font-sans">Histórico de pedidos</h1>
                                 <div class="h-[59.5vh] w-[100%] overflow-auto border-b-4 border-black">
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
-                                    <ProdutoNoHistorico class="w-[100%] h-[15vh]"></ProdutoNoHistorico>
+                                    <div v-for="produtoDoHistorico in userLogado.historicoDeCompras"
+                                        :key="produtoDoHistorico">
+                                        <ProdutoNoHistorico class="w-[100%] h-[15vh]" :nome="produtoDoHistorico.nome" :preco="produtoDoHistorico.preco" :tamanho="produtoDoHistorico.tamanho" :img="produtoDoHistorico.img"></ProdutoNoHistorico>
+                                    </div>
                                 </div>
                                 <button
-                                    class="border-2 border-black rounded-md mt-4 bg-[#D9D9D9] w-[42.5vw] h-14 text-center flex justify-center items-center">
+                                    class="border-2 border-black rounded-md mt-4 bg-[#D9D9D9] w-[42.5vw] h-14 text-center flex justify-center items-center"
+                                    @click="verificaUsuarios()">
                                     <p>Ver pedidos em andamento</p>
                                     <img src="../assets/entregaIcon.svg">
                                 </button>
@@ -159,6 +160,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import HeaderDesktop from '@/components/HeaderDesktop.vue'
 import HeaderMobile from '../components/HeaderMobile.vue';
 import ProdutoNoHistorico from '../components/ProdutoNoHistorico.vue';
+import {usuarios} from '../data/usuariosData.js';
 
 export default {
     components: {
@@ -169,6 +171,9 @@ export default {
     methods: {
         mudarFiltroNaTela() {
             this.filtroNaTela = !this.filtroNaTela;
+        },
+        verificaUsuarios(){
+            console.log(usuarios);
         }
     },
     setup() {
@@ -195,6 +200,11 @@ export default {
         return {
             tamanhoDaTela
         };
+    },
+    data(){
+        return{
+            userLogado: usuarios[0]
+        }
     }
 }
 
