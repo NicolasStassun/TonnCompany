@@ -47,7 +47,7 @@
         <div class="w-1/6 h-[10v] flex">
             <div
                 class="w-1/2 h-full border-r-2 border-[#BBBBBB] shadow-inner hover:bg-[#ebebeb] drop-shadow-2xl cursor-pointer">
-                <RouterLink to="/">
+                <RouterLink to="/perfil">
                     <div class="h-[10vh] flex justify-center items-center">
                         <img src="../assets/userIcon.svg" class="w-1/2 h-1/2">
                     </div>

@@ -13,10 +13,10 @@
       <div>
         <div v-if="filtroNaTela">
           <div v-if="tamanhoDaTela == 'Mobile'">
-            <FiltroMobile @click="mudarFiltroNaTela()" />
+            <FiltroMobile v-on:fechaFiltro="mudarFiltroNaTela"/>
           </div>
           <div v-if="tamanhoDaTela == 'Desktop'">
-            <FiltroDesktop class="mt-[5vh] w-[20vw]" />
+            <FiltroDesktop v-on:fechaFiltro="mudarFiltroNaTela" class="w-[20vw] mt-12" />
           </div>
         </div>
       </div>
