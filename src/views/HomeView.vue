@@ -2,10 +2,10 @@
   <main class="w-full bg-[#F9F9F9]" style="height: auto; min-height: 100vh; max-height: fit-content;">
     <header class="w-full" style="height: auto; min-height: 10vh; max-height: fit-content;">
       <div v-if="tamanhoDaTela == 'Mobile'">
-        <HeaderMobile />
+        <HeaderMobile class="sticky top-0"/>
       </div>
       <div v-if="tamanhoDaTela == 'Desktop'">
-        <HeaderDesktop/>
+        <HeaderDesktop class="sticky top-0"/>
       </div>
     </header>
     <body style="height: auto; min-height: 89vh; max-height: fit-content;">
@@ -39,10 +39,12 @@ export default {
 
     onMounted(() => {
       window.addEventListener('resize', updateTamanhoDaTela);
+      updateTamanhoDaTela();
     });
 
     onBeforeUnmount(() => {
       window.removeEventListener('resize', updateTamanhoDaTela);
+      updateTamanhoDaTela();
     });
 
     return {

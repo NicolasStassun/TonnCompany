@@ -5,11 +5,11 @@
         </div>
         <div class="flex items-center justify-between w-full">
             <div>
-                <h1 class="text-2xl">Nome</h1>
-                <p class="text-lg">Tamanho - P</p>
+                <h1 class="text-[3vh] font-bold">Nome</h1>
+                <p class="text-[2vh]">Tamanho - P</p>
             </div>
             <div>
-                <h1 class="text-3xl pr-6">R$ 90,00</h1>
+                <h1 class="text-[3vh] pr-6">R$ 90,00</h1>
             </div>
             
 

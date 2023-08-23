@@ -2,10 +2,10 @@
   <main class="w-full bg-[#F9F9F9]" style="height: auto; min-height: 100vh; max-height: fit-content;">
     <header class="w-full" style="height: auto; min-height: 10vh; max-height: fit-content;">
       <div v-if="tamanhoDaTela == 'Mobile'">
-        <HeaderMobile />
+        <HeaderMobile class="sticky top-0 z-40"/>
       </div>
       <div v-if="tamanhoDaTela == 'Desktop'">
-        <HeaderDesktop />
+        <HeaderDesktop class="sticky top-0 z-40"/>
       </div>
     </header>
 
@@ -13,7 +13,7 @@
       <div>
         <div v-if="filtroNaTela">
           <div v-if="tamanhoDaTela == 'Mobile'">
-            <FiltroMobile v-on:fechaFiltro="mudarFiltroNaTela"/>
+            <FiltroMobile v-on:fechaFiltro="mudarFiltroNaTela" />
           </div>
           <div v-if="tamanhoDaTela == 'Desktop'">
             <FiltroDesktop v-on:fechaFiltro="mudarFiltroNaTela" class="w-[20vw] mt-12" />
@@ -48,7 +48,8 @@
             <img class="h-[4vh] w-[4vw]" src="../assets/filtroIcon.svg">
           </div>
         </div>
-        <div class="w-3/4 flex flex-wrap content-center justify-center" style="height: auto; min-height: 90vh; max-height: fit-content; ">
+        <div class="w-3/4 flex flex-wrap content-center justify-center"
+          style="height: auto; min-height: 90vh; max-height: fit-content; ">
           <div v-for="produto in produtos" :key="produto">
             <ProdutoDisplay class="hover:contrast-[1.20] drop-shadow-2xl cursor-pointer" :nome="produto.nome"
               :preco="produto.preco" :img="produto.img"></ProdutoDisplay>
@@ -91,6 +92,7 @@ export default {
     }
   },
   setup() {
+
     const tamanhoDaTela = ref('Desktop');
 
     const updateTamanhoDaTela = () => {
@@ -103,6 +105,7 @@ export default {
 
     onMounted(() => {
       window.addEventListener('resize', updateTamanhoDaTela);
+      updateTamanhoDaTela(); // Chama a função no momento da montagem para exibir a informação inicial
     });
 
     onBeforeUnmount(() => {
