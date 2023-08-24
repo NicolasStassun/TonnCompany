@@ -46,11 +46,11 @@
 </template>
 <script setup>
 
-import { defineProps, ref, onMounted, onBeforeUnmount, toRefs } from 'vue';
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
-  aplicarFiltros: Function, // Adicione outras propriedades aqui se necessário
-  removerFiltros: Function
+    aplicarFiltros: Function,
+    removerFiltros: Function
 });
 
 const sizes = ['P', 'M', 'G', 'GG'];
@@ -116,7 +116,7 @@ function toggleFilter(type, value) {
         }
     }
     $emit('update-filters', filtrosTamanho, filtrosCores);
-    props.aplicarFiltros([...filtrosTamanho], [...filtrosCores]);
+    props.aplicarFiltros([...filtrosTamanho.value], [...filtrosCores.value]);
     props.removerFiltros();
 }
 

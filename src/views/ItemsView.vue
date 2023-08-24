@@ -72,21 +72,18 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import HeaderDesktop from '@/components/HeaderDesktop.vue';
-import HeaderMobile from '../components/HeaderMobile.vue';
-import ProdutoDisplay from '../components/ProdutoDisplay.vue';
-import TheRat from '../assets/TheRat.png';
-import FiltroMobile from '../components/FiltroMobile.vue';
 import FiltroDesktop from '../components/FiltroDesktop.vue';
-import ProdutoDisplayMobile from '../components/ProdutoDisplayMobile.vue';
 import { camisas } from '../data/camisasData.ts';
 
-
+const filtroTamanho = ref([]);
+const filtroCores = ref([]);
 const filtroNaTela = ref(false);
-const { filtroTamanho, filtroCores } = toRefs(props);
+
+const tamanhoDaTela = ref('Desktop');
 
 function atualizarFiltros(tamanhos, cores) {
-  filtroTamanho = tamanhos;
-  filtroCores = cores;
+  filtroTamanho.value = [...tamanhos];
+  filtroCores.value = [...cores];
 }
 
 const mudarFiltroNaTela = () => {
@@ -99,8 +96,6 @@ function verCamisas() {
   console.log([...filtroCores.value]);
 }
 
-const tamanhoDaTela = ref('Desktop');
-
 const updateTamanhoDaTela = () => {
   if (window.innerWidth <= 820) {
     tamanhoDaTela.value = 'Mobile';
@@ -111,7 +106,6 @@ const updateTamanhoDaTela = () => {
 
 const resizeListener = () => {
   updateTamanhoDaTela();
-
 };
 
 onMounted(() => {
@@ -122,5 +116,4 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('resize', resizeListener);
 });
-
 </script>
