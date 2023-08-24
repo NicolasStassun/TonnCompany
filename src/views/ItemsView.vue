@@ -2,10 +2,10 @@
   <main class="w-full bg-[#F9F9F9]" style="height: auto; min-height: 100vh; max-height: fit-content;">
     <header class="w-full" style="height: auto; min-height: 8vh; max-height: fit-content;">
       <div v-if="tamanhoDaTela == 'Mobile'">
-        <HeaderMobile class="sticky top-0 z-40"/>
+        <HeaderMobile class="sticky top-0 z-40" />
       </div>
       <div v-if="tamanhoDaTela == 'Desktop'">
-        <HeaderDesktop class="sticky top-0 z-40"/>
+        <HeaderDesktop class="sticky top-0 z-40" />
       </div>
     </header>
 
@@ -16,7 +16,9 @@
             <FiltroMobile v-on:fechaFiltro="mudarFiltroNaTela" />
           </div>
           <div v-if="tamanhoDaTela == 'Desktop'">
-            <FiltroDesktop v-on:fechaFiltro="mudarFiltroNaTela" class="w-[20vw] mt-12" />
+            <FiltroDesktop :aplicar-filtros="receberFiltros" :remover-filtros="limparFiltros"
+              :update-filters="atualizarFiltros" v-on:fechaFiltro="mudarFiltroNaTela" class="w-[20vw] mt-12" />
+
           </div>
         </div>
       </div>
@@ -31,7 +33,7 @@
         </div>
         <div class="w-3/4 flex flex-wrap content-start justify-center"
           style="height: auto; min-height: 90vh; max-height: fit-content; ">
-          <div v-for="produto in produtos" :key="produto">
+          <div v-for="produto in camisas">
             <ProdutoDisplayMobile class="hover:contrast-[1.20] drop-shadow-2xl mt-[4vh] mb-[4vh] cursor-pointer"
               :nome="produto.nome" :preco="produto.preco" :img="produto.img" :tamanhoDaTela="tamanhoDaTela">
             </ProdutoDisplayMobile>
@@ -50,11 +52,12 @@
         </div>
         <div class="w-3/4 flex flex-wrap content-center justify-center"
           style="height: auto; min-height: 90vh; max-height: fit-content; ">
-          <div v-for="produto in produtos" :key="produto">
+          <div v-for="produto in camisas">
             <ProdutoDisplay class="hover:contrast-[1.20] drop-shadow-2xl cursor-pointer" :nome="produto.nome"
               :preco="produto.preco" :img="produto.img"></ProdutoDisplay>
           </div>
         </div>
+        <button @click="verCamisas()">teste</button>
       </div>
 
 
@@ -66,7 +69,7 @@
     </body>
   </main>
 </template>
-<script>
+<script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import HeaderDesktop from '@/components/HeaderDesktop.vue';
 import HeaderMobile from '../components/HeaderMobile.vue';
@@ -75,57 +78,49 @@ import TheRat from '../assets/TheRat.png';
 import FiltroMobile from '../components/FiltroMobile.vue';
 import FiltroDesktop from '../components/FiltroDesktop.vue';
 import ProdutoDisplayMobile from '../components/ProdutoDisplayMobile.vue';
+import { camisas } from '../data/camisasData.ts';
 
 
-export default {
-  components: {
-    HeaderDesktop,
-    HeaderMobile,
-    ProdutoDisplay,
-    FiltroMobile,
-    FiltroDesktop,
-    ProdutoDisplayMobile
-  },
-  methods: {
-    mudarFiltroNaTela() {
-      this.filtroNaTela = !this.filtroNaTela;
-    }
-  },
-  setup() {
+const filtroNaTela = ref(false);
+const { filtroTamanho, filtroCores } = toRefs(props);
 
-    const tamanhoDaTela = ref('Desktop');
+function atualizarFiltros(tamanhos, cores) {
+  filtroTamanho = tamanhos;
+  filtroCores = cores;
+}
 
-    const updateTamanhoDaTela = () => {
-      if (window.innerWidth <= 820) {
-        tamanhoDaTela.value = 'Mobile';
-      } else {
-        tamanhoDaTela.value = 'Desktop';
-      }
-    };
+const mudarFiltroNaTela = () => {
+  filtroNaTela.value = !filtroNaTela.value;
+};
 
-    onMounted(() => {
-      window.addEventListener('resize', updateTamanhoDaTela);
-      updateTamanhoDaTela(); // Chama a função no momento da montagem para exibir a informação inicial
-    });
+function verCamisas() {
+  console.log(camisas);
+  console.log([...filtroTamanho.value]);
+  console.log([...filtroCores.value]);
+}
 
-    onBeforeUnmount(() => {
-      window.removeEventListener('resize', updateTamanhoDaTela);
-    });
+const tamanhoDaTela = ref('Desktop');
 
-    return {
-      tamanhoDaTela
-    };
-  },
-  data() {
-    return {
-
-      filtroNaTela: false,
-
-      
-
-    }
+const updateTamanhoDaTela = () => {
+  if (window.innerWidth <= 820) {
+    tamanhoDaTela.value = 'Mobile';
+  } else {
+    tamanhoDaTela.value = 'Desktop';
   }
 };
 
+const resizeListener = () => {
+  updateTamanhoDaTela();
+
+};
+
+onMounted(() => {
+  window.addEventListener('resize', resizeListener);
+  updateTamanhoDaTela();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', resizeListener);
+});
 
 </script>
