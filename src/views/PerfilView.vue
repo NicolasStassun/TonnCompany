@@ -160,7 +160,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import HeaderDesktop from '@/components/HeaderDesktop.vue'
 import HeaderMobile from '../components/HeaderMobile.vue';
 import ProdutoNoHistorico from '../components/ProdutoNoHistorico.vue';
-import {usuarios} from '../data/usuariosData.js';
+import {usuarios} from '../data/usuariosData.ts';
 
 export default {
     components: {

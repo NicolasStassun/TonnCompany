@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[15vh] mt-6 rounded-xl bg-[#D9D9D9] flex">
+    <div class="w-full h-[15vh] mt-6 bg-[#D9D9D9] flex">
         <div class="w-[150px] h-full flex justify-center items-center">
             <img class="w-[100px] h-[100px] border-[1px] border-black" :src="img">
         </div>
